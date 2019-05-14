@@ -10,6 +10,10 @@ namespace program1
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("siemanko");
+            
         }
+
+
     }
 }
