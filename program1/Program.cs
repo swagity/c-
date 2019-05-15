@@ -12,11 +12,14 @@ namespace program1
 
         static void Main(string[] args)
         {
-            for (; ; )
+            ValueTypes();
+
+            for (;;)
             {
-                Greeting();
-                Agerestrictions();
-                Consolesettings();
+                 Greeting();
+                 Agerestrictions();
+                 Consolesettings();
+                
             }
 
 
@@ -27,6 +30,18 @@ namespace program1
            
 
 
+        }
+
+        private static void ValueTypes()
+        {
+            int maxInt = int.MaxValue;
+            int minInt = int.MinValue;
+            long maxLong = long.MaxValue;
+            long minLong = long.MinValue;
+            Console.WriteLine("maksymalny int:" +  maxInt );
+            Console.WriteLine("min int:" + minInt);
+            Console.WriteLine("max long: "+ maxLong);
+            Console.WriteLine("min long: "+ minLong);
         }
 
         private static void Consolesettings()
