@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.pb_rocket2 = new System.Windows.Forms.PictureBox();
+            this.pb_Enemy = new System.Windows.Forms.PictureBox();
             this.WorldFrame = new System.Windows.Forms.Panel();
             this.pb_ball = new System.Windows.Forms.PictureBox();
-            this.pb_rocket = new System.Windows.Forms.PictureBox();
+            this.pb_Player = new System.Windows.Forms.PictureBox();
             this.player_4 = new System.Windows.Forms.PictureBox();
             this.player_3 = new System.Windows.Forms.PictureBox();
             this.player_2 = new System.Windows.Forms.PictureBox();
@@ -44,12 +44,12 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.timerMoveBall = new System.Windows.Forms.Timer(this.components);
+            this.timer_MoveBall = new System.Windows.Forms.Timer(this.components);
             this.timerEnemy = new System.Windows.Forms.Timer(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.pb_rocket2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_Enemy)).BeginInit();
             this.WorldFrame.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pb_ball)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pb_rocket)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_Player)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.player_4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.player_3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.player_2)).BeginInit();
@@ -60,22 +60,22 @@
             ((System.ComponentModel.ISupportInitialize)(this.enemy_4)).BeginInit();
             this.SuspendLayout();
             // 
-            // pb_rocket2
+            // pb_Enemy
             // 
-            this.pb_rocket2.BackColor = System.Drawing.Color.Red;
-            this.pb_rocket2.Location = new System.Drawing.Point(778, 140);
-            this.pb_rocket2.Name = "pb_rocket2";
-            this.pb_rocket2.Size = new System.Drawing.Size(23, 129);
-            this.pb_rocket2.TabIndex = 0;
-            this.pb_rocket2.TabStop = false;
-            this.pb_rocket2.Click += new System.EventHandler(this.PictureBox1_Click);
+            this.pb_Enemy.BackColor = System.Drawing.Color.Red;
+            this.pb_Enemy.Location = new System.Drawing.Point(778, 140);
+            this.pb_Enemy.Name = "pb_Enemy";
+            this.pb_Enemy.Size = new System.Drawing.Size(23, 129);
+            this.pb_Enemy.TabIndex = 0;
+            this.pb_Enemy.TabStop = false;
+            this.pb_Enemy.Click += new System.EventHandler(this.PictureBox1_Click);
             // 
             // WorldFrame
             // 
-            this.WorldFrame.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.WorldFrame.BackColor = System.Drawing.SystemColors.Highlight;
             this.WorldFrame.Controls.Add(this.pb_ball);
-            this.WorldFrame.Controls.Add(this.pb_rocket);
-            this.WorldFrame.Controls.Add(this.pb_rocket2);
+            this.WorldFrame.Controls.Add(this.pb_Player);
+            this.WorldFrame.Controls.Add(this.pb_Enemy);
             this.WorldFrame.Location = new System.Drawing.Point(-1, 0);
             this.WorldFrame.Name = "WorldFrame";
             this.WorldFrame.Size = new System.Drawing.Size(806, 397);
@@ -92,14 +92,14 @@
             this.pb_ball.TabStop = false;
             this.pb_ball.Click += new System.EventHandler(this.Pb_ball_Click);
             // 
-            // pb_rocket
+            // pb_Player
             // 
-            this.pb_rocket.BackColor = System.Drawing.Color.Blue;
-            this.pb_rocket.Location = new System.Drawing.Point(3, 140);
-            this.pb_rocket.Name = "pb_rocket";
-            this.pb_rocket.Size = new System.Drawing.Size(23, 129);
-            this.pb_rocket.TabIndex = 1;
-            this.pb_rocket.TabStop = false;
+            this.pb_Player.BackColor = System.Drawing.Color.Blue;
+            this.pb_Player.Location = new System.Drawing.Point(3, 140);
+            this.pb_Player.Name = "pb_Player";
+            this.pb_Player.Size = new System.Drawing.Size(23, 129);
+            this.pb_Player.TabIndex = 1;
+            this.pb_Player.TabStop = false;
             // 
             // player_4
             // 
@@ -197,10 +197,11 @@
             this.textBox2.Text = "PLAYER2";
             this.textBox2.TextChanged += new System.EventHandler(this.TextBox2_TextChanged);
             // 
-            // timerMoveBall
+            // timer_MoveBall
             // 
-            this.timerMoveBall.Enabled = true;
-            this.timerMoveBall.Interval = 1;
+            this.timer_MoveBall.Enabled = true;
+            this.timer_MoveBall.Interval = 1;
+            this.timer_MoveBall.Tick += new System.EventHandler(this.timer_MoveBall_Tick);
             // 
             // timerEnemy
             // 
@@ -230,10 +231,10 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
-            ((System.ComponentModel.ISupportInitialize)(this.pb_rocket2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_Enemy)).EndInit();
             this.WorldFrame.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pb_ball)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pb_rocket)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_Player)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.player_4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.player_3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.player_2)).EndInit();
@@ -249,9 +250,9 @@
 
         #endregion
 
-        private System.Windows.Forms.PictureBox pb_rocket2;
+        private System.Windows.Forms.PictureBox pb_Enemy;
         private System.Windows.Forms.Panel WorldFrame;
-        private System.Windows.Forms.PictureBox pb_rocket;
+        private System.Windows.Forms.PictureBox pb_Player;
         private System.Windows.Forms.PictureBox pb_ball;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.PictureBox player_4;
@@ -264,7 +265,7 @@
         private System.Windows.Forms.PictureBox enemy_4;
         private System.Windows.Forms.TextBox textBox2;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
-        private System.Windows.Forms.Timer timerMoveBall;
+        private System.Windows.Forms.Timer timer_MoveBall;
         private System.Windows.Forms.Timer timerEnemy;
     }
 }

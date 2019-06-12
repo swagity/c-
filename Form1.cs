@@ -16,20 +16,26 @@ namespace pingpeng
         {
             InitializeComponent();
 
+        }
+
             PictureBox[] Score_Player = new PictureBox[5];
             PictureBox[] Score_Enemy = new PictureBox[5];
-
+            Color ScoreColor = Color.Silver;                
+            Random rng = new Random();                      
+            Boolean Player_Up, Player_Down = false;         
+            Boolean BallGoingLeft = true;                   
+            Boolean GameOn = false;
 
             int Speed_Player;
             int Speed_Enemy;
             int Ball_Speed;
             int Ball_Force;
 
-        }
+        
 
         public Boolean Collision_Left(PictureBox obj)
         {
-            if (obj.Location.X <= 0)    //If the "obj" picturebox is behind the screen
+            if (obj.Location.X <= 0)    
             {
                 return true;
             }
@@ -38,7 +44,7 @@ namespace pingpeng
 
         public Boolean Collision_Right(PictureBox obj)
         {
-            if (obj.Location.X + obj.Width >= WorldFrame.Width) //If the obj is further away the screen
+            if (obj.Location.X + obj.Width >= WorldFrame.Width) 
             {
                 return true;
             }
@@ -63,6 +69,12 @@ namespace pingpeng
                 return true;
             }
             return false;
+        }
+        public Boolean Collision_Player(PictureBox obj)
+        {
+            if ()
+            {
+            }
         }
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -108,6 +120,8 @@ namespace pingpeng
         {
 
         }
+       
+        
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
@@ -139,6 +153,11 @@ namespace pingpeng
                     Player_Down = false;
                     break;
             }
+        }
+
+        private void timer_MoveBall_Tick(object sender, EventArgs e)
+        {
+
         }
 
         private void Timer1_Tick(object sender, EventArgs e)
