@@ -55,26 +55,127 @@ namespace pingpeng
        
         public Boolean Collision_Up(PictureBox obj)
         {
-            if (obj.Location.Y <= 0)    //If the objs Y coordinate is above the screen
-            {
-                return true;
-            }
-            return false;
+                if (obj.Location.Y <= 0)    //gdy obiekt Y znajduje się poniżej ekranu
+                {
+                    return true;
+                }
+                return false;
         }
 
         public Boolean Collision_Down(PictureBox obj)
         {
-            if (obj.Location.Y + obj.Height >= WorldFrame.Height)   //If the Obj is below the screen
+            if (obj.Location.Y + obj.Height >= WorldFrame.Height)   //gdy znajduje sie powyżej ekranu
             {
                 return true;
             }
             return false;
         }
-        public Boolean Collision_Player(PictureBox obj)
+        public Boolean Collision_Enemy(PictureBox tar)
         {
-            if ()
-            {
+            PictureBox temp1 = new PictureBox();   
+            temp1.Bounds = pb_Enemy.Bounds;         
+                                                    
+            temp1.SetBounds(temp1.Location.X - 1, temp1.Location.Y, 1, 10);
+            if (tar.Bounds.IntersectsWith(temp1.Bounds))    
+            {                                               
+                Ball_Force = 3;                              
+                return true;
             }
+            temp1.SetBounds(temp1.Location.X, temp1.Location.Y + 5, 1, 10);
+            if (tar.Bounds.IntersectsWith(temp1.Bounds))    
+            {
+                Ball_Force = 2;                              
+                return true;
+            }
+            temp1.SetBounds(temp1.Location.X, temp1.Location.Y + 10, 1, 10);
+            if (tar.Bounds.IntersectsWith(temp1.Bounds))    
+            {
+                Ball_Force = 1;
+                return true;
+            }
+            temp1.SetBounds(temp1.Location.X, temp1.Location.Y + 10, 1, 10);
+            if (tar.Bounds.IntersectsWith(temp1.Bounds))
+            {
+                Ball_Force = 0;
+                return true;
+            }
+            temp1.SetBounds(temp1.Location.X, temp1.Location.Y + 10, 1, 10);
+            if (tar.Bounds.IntersectsWith(temp1.Bounds))
+            {
+                Ball_Force = -1;
+                return true;
+            }
+            temp1.SetBounds(temp1.Location.X, temp1.Location.Y + 10, 1, 10);
+            if (tar.Bounds.IntersectsWith(temp1.Bounds))
+            {
+                Ball_Force = -2;
+                return true;
+            }
+            temp1.SetBounds(temp1.Location.X, temp1.Location.Y + 10, 1, 10);
+            if (tar.Bounds.IntersectsWith(temp1.Bounds))
+            {
+                Ball_Force = -3;
+                return true;
+            }
+            return false;
+        }
+        public Boolean Collision_Player(PictureBox tar)
+        {
+            if (tar.Bounds.IntersectsWith(pb_Player.Bounds))    
+            {
+                PictureBox temp1 = new PictureBox();
+                temp1.Bounds = pb_Player.Bounds;
+                temp1.SetBounds(temp1.Location.X + temp1.Width, temp1.Location.Y, 1, 10);
+                
+                if (tar.Bounds.IntersectsWith(temp1.Bounds))    
+                {
+                    Ball_Force = 3;
+                    return true;
+                }
+                temp1.SetBounds(temp1.Location.X, temp1.Location.Y + 5, 1, 10);
+
+                if (tar.Bounds.IntersectsWith(temp1.Bounds))
+                {
+                    Ball_Force = 2;
+                    return true;
+                }
+                temp1.SetBounds(temp1.Location.X, temp1.Location.Y + 10, 1, 10);
+               
+                if (tar.Bounds.IntersectsWith(temp1.Bounds))
+                {
+                    Ball_Force = 1;
+                    return true;
+                }
+                temp1.SetBounds(temp1.Location.X, temp1.Location.Y + 10, 1, 10);
+              
+                if (tar.Bounds.IntersectsWith(temp1.Bounds))
+                {
+                    Ball_Force = 0;
+                    return true;
+                }
+                temp1.SetBounds(temp1.Location.X, temp1.Location.Y + 10, 1, 10);
+                
+                if (tar.Bounds.IntersectsWith(temp1.Bounds))
+                {
+                    Ball_Force = -1;
+                    return true;
+                }
+                temp1.SetBounds(temp1.Location.X, temp1.Location.Y + 10, 1, 10);
+        
+                if (tar.Bounds.IntersectsWith(temp1.Bounds))
+                {
+                    Ball_Force = -2;
+                    return true;
+                }
+                temp1.SetBounds(temp1.Location.X, temp1.Location.Y + 10, 1, 10);
+          
+                if (tar.Bounds.IntersectsWith(temp1.Bounds))
+                {
+                    Ball_Force = -3;
+                    return true;
+                }
+            }
+            return false;
         }
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -123,9 +224,9 @@ namespace pingpeng
        
         
 
-        private void Form1_KeyDown(object sender, KeyEventArgs e)
-        {
-            switch (e.KeyCode)
+        private void Form1_KeyDown(object sender, KeyEventArgs e)  //eventholder  z intrukcją switch dla wcisniecia klawisza 
+        {                                                           // zmienia booleany Player_Up i Player_Down w przypadku wcisniecia klawisza
+            switch (e.KeyCode)                                      
             {
                 case Keys.W:
                 case Keys.Up:
@@ -140,7 +241,7 @@ namespace pingpeng
             }
         }
 
-        private void Form1_KeyUp(object sender, KeyEventArgs e)
+        private void Form1_KeyUp(object sender, KeyEventArgs e) // instrukcja switch dla niewciśniętego klawisza
         {
             switch (e.KeyCode)
             {
