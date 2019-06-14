@@ -15,6 +15,7 @@ namespace pingpeng
         public Form1()
         {
             InitializeComponent();
+            this.KeyPreview = true;
 
         }
 
@@ -26,10 +27,11 @@ namespace pingpeng
             Boolean BallGoingLeft = true;                   
             Boolean GameOn = false;
 
-            int Speed_Player;
-            int Speed_Enemy;
-            int Ball_Speed;
+            int Speed_Player=2;
+            int Speed_Enemy=2;
+            int Ball_Speed=6;
             int Ball_Force;
+            int Round = 0;
         public Boolean Collision_Left(PictureBox obj)
         {
             if (obj.Location.X <= 0)    
@@ -64,48 +66,56 @@ namespace pingpeng
             }
             return false;
         }
+        public void PaintBox(int X, int Y, int W, int H, Color C)
+        {
+            PictureBox Temp = new PictureBox();
+            Temp.BackColor = C;
+            Temp.Size = new Size(W, H);
+            Temp.Location = new Point(X, Y);
+            WorldFrame.Controls.Add(Temp);
+        }
         public Boolean Collision_Enemy(PictureBox tar)
         {
             PictureBox temp1 = new PictureBox();   
             temp1.Bounds = pb_Enemy.Bounds;         
                                                     
-            temp1.SetBounds(temp1.Location.X - 1, temp1.Location.Y, 1, 10);
+            temp1.SetBounds(temp1.Location.X - 1, temp1.Location.Y, 1, 20);
             if (tar.Bounds.IntersectsWith(temp1.Bounds))    
             {                                               
                 Ball_Force = 3;                              
                 return true;
             }
-            temp1.SetBounds(temp1.Location.X, temp1.Location.Y + 5, 1, 10);
+            temp1.SetBounds(temp1.Location.X, temp1.Location.Y + 10, 1, 20);
             if (tar.Bounds.IntersectsWith(temp1.Bounds))    
             {
                 Ball_Force = 2;                              
                 return true;
             }
-            temp1.SetBounds(temp1.Location.X, temp1.Location.Y + 10, 1, 10);
+            temp1.SetBounds(temp1.Location.X, temp1.Location.Y + 15, 1, 20);
             if (tar.Bounds.IntersectsWith(temp1.Bounds))    
             {
                 Ball_Force = 1;
                 return true;
             }
-            temp1.SetBounds(temp1.Location.X, temp1.Location.Y + 10, 1, 10);
+            temp1.SetBounds(temp1.Location.X, temp1.Location.Y + 15, 1, 20);
             if (tar.Bounds.IntersectsWith(temp1.Bounds))
             {
                 Ball_Force = 0;
                 return true;
             }
-            temp1.SetBounds(temp1.Location.X, temp1.Location.Y + 10, 1, 10);
+            temp1.SetBounds(temp1.Location.X, temp1.Location.Y + 15, 1, 20);
             if (tar.Bounds.IntersectsWith(temp1.Bounds))
             {
                 Ball_Force = -1;
                 return true;
             }
-            temp1.SetBounds(temp1.Location.X, temp1.Location.Y + 10, 1, 10);
+            temp1.SetBounds(temp1.Location.X, temp1.Location.Y + 15, 1, 20);
             if (tar.Bounds.IntersectsWith(temp1.Bounds))
             {
                 Ball_Force = -2;
                 return true;
             }
-            temp1.SetBounds(temp1.Location.X, temp1.Location.Y + 10, 1, 10);
+            temp1.SetBounds(temp1.Location.X, temp1.Location.Y + 15, 1, 20);
             if (tar.Bounds.IntersectsWith(temp1.Bounds))
             {
                 Ball_Force = -3;
@@ -119,49 +129,49 @@ namespace pingpeng
             {
                 PictureBox temp1 = new PictureBox();
                 temp1.Bounds = pb_Player.Bounds;
-                temp1.SetBounds(temp1.Location.X + temp1.Width, temp1.Location.Y, 1, 10);
+                temp1.SetBounds(temp1.Location.X + temp1.Width, temp1.Location.Y, 1, 20);
                 
                 if (tar.Bounds.IntersectsWith(temp1.Bounds))    
                 {
                     Ball_Force = 3;
                     return true;
                 }
-                temp1.SetBounds(temp1.Location.X, temp1.Location.Y + 5, 1, 10);
+                temp1.SetBounds(temp1.Location.X, temp1.Location.Y + 10, 1, 20);
 
                 if (tar.Bounds.IntersectsWith(temp1.Bounds))
                 {
                     Ball_Force = 2;
                     return true;
                 }
-                temp1.SetBounds(temp1.Location.X, temp1.Location.Y + 10, 1, 10);
+                temp1.SetBounds(temp1.Location.X, temp1.Location.Y + 15, 1, 20);
                
                 if (tar.Bounds.IntersectsWith(temp1.Bounds))
                 {
                     Ball_Force = 1;
                     return true;
                 }
-                temp1.SetBounds(temp1.Location.X, temp1.Location.Y + 10, 1, 10);
+                temp1.SetBounds(temp1.Location.X, temp1.Location.Y + 15, 1, 20);
               
                 if (tar.Bounds.IntersectsWith(temp1.Bounds))
                 {
                     Ball_Force = 0;
                     return true;
                 }
-                temp1.SetBounds(temp1.Location.X, temp1.Location.Y + 10, 1, 10);
+                temp1.SetBounds(temp1.Location.X, temp1.Location.Y + 15, 1, 20);
                 
                 if (tar.Bounds.IntersectsWith(temp1.Bounds))
                 {
                     Ball_Force = -1;
                     return true;
                 }
-                temp1.SetBounds(temp1.Location.X, temp1.Location.Y + 10, 1, 10);
+                temp1.SetBounds(temp1.Location.X, temp1.Location.Y + 15, 1, 20);
         
                 if (tar.Bounds.IntersectsWith(temp1.Bounds))
                 {
                     Ball_Force = -2;
                     return true;
                 }
-                temp1.SetBounds(temp1.Location.X, temp1.Location.Y + 10, 1, 10);
+                temp1.SetBounds(temp1.Location.X, temp1.Location.Y + 15, 1, 20);
           
                 if (tar.Bounds.IntersectsWith(temp1.Bounds))
                 {
@@ -171,10 +181,62 @@ namespace pingpeng
             }
             return false;
         }
+        public void CircleThis(PictureBox pic)  //Just a function to redraw the ball into a circle.
+        {
+            System.Drawing.Drawing2D.GraphicsPath gp = new System.Drawing.Drawing2D.GraphicsPath();
+            gp.AddEllipse(0, 0, pic.Width - 3, pic.Height - 3);
+            Region rg = new Region(gp);
+            pic.Region = rg;
+        }
+        public PictureBox PicID(int i, Boolean Enemy = false)
+        {
+            if (Enemy)
+            {   //Just to make life easier, able to do a loop and go through all of these.
+                switch (i)
+                {
+                    case 1:
+                        return enemy_1;
+                    case 2:
+                        return enemy_2;
+                    case 3:
+                        return enemy_3;
+                    case 4:
+                        return enemy_4;
+
+                }
+            }
+            else
+            {
+                switch (i)
+                {
+                    case 1:
+                        return player_1;
+                    case 2:
+                        return player_2;
+                    case 3:
+                        return player_3;
+                    case 4:
+                        return player_4;
+
+
+                }
+            }
+                return pb_ball;
+            
+        }
         private void Form1_Load(object sender, EventArgs e)
         {
-       
+            for (int i = 0; i < 5; i++)
+            {
+                Score_Player[i] = PicID(i + 1);         //Adds the "score" pictureboxes to an array each
+                Score_Enemy[i] = PicID(i + 1, true);
+            }
+            CircleThis(pb_ball);    // Circles the ball
+           
+            pb_ball.Location = new Point(208, rng.Next(10, 190));   // Moves the ball in place
+            LosowyStart(BallGoingLeft); //Randomizes the direction of the ball
         }
+        
 
         private void PictureBox1_Click(object sender, EventArgs e)
         {
@@ -267,17 +329,17 @@ namespace pingpeng
         }
         public int odbicie(int x, Boolean Force = false, Boolean Negative = false)
         {
-            if (Force)  //Kinda overdid this, not sure why but here's how it works
+            if (Force)               //odbicie wzięte z internetu, nie do konca wiem jak ono dokładnie działa 
             {
-                if (Negative)   //If the Negative boolean is on, it's always returns a negative number
+                if (Negative)   
                 {
-                    if (x > 0)  //So if X is above 0 it changes it
+                    if (x > 0)  
                     {
-                        x = ~x + 1; //Not sure how this worked, ask the guy behind you.
+                        x = ~x + 1; 
                     }
                 }
                 else
-                {   //Simple math, negatives a positive number
+                {   
                     x = x - (x * 2);
                 }
             }
@@ -297,9 +359,9 @@ namespace pingpeng
         public void AddScore(PictureBox[] Arr)
         {
             for (int i = 0; i < Arr.Length; i++)
-            {   //Goes through the entire array, checks where the first "non black" box is
+            {   //sprawdza całą liste w poszukiwania nie czarnego boxa
                 if (Arr[i].BackColor == ScoreColor)
-                {   //And then changes it to black
+                {   //zmienia ten box na czarny
                     Arr[i].BackColor = Color.Black;
                     break;
                 }
@@ -384,9 +446,33 @@ namespace pingpeng
 
         }
 
+        private void Timer_Sec_Tick(object sender, EventArgs e)
+        {
+            if (GameOn)
+            {
+                Round++;
+                label_Time.Visible = true;
+
+                TimeSpan time = TimeSpan.FromSeconds(Round);
+
+                string str = time.ToString(@"mm\:ss");
+                label_Time.Text = "Time: " + str;
+            }
+        }
+
         private void Timer1_Tick(object sender, EventArgs e)
         {
-
+            if (GameOn) //Timer to move the Enemy
+            {   //Always tries to be in the middle
+                if (pb_Enemy.Location.Y + 28 < pb_ball.Location.Y)
+                {   //Which is around 28 pixels below its Y coordinate
+                    pb_Enemy.Top += Speed_Enemy;
+                }
+                else
+                {
+                    pb_Enemy.Top -= Speed_Enemy;
+                }
+            }
         }
     }
 }

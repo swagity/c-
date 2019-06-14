@@ -45,6 +45,10 @@
             this.timer_MoveBall = new System.Windows.Forms.Timer(this.components);
             this.timerEnemy = new System.Windows.Forms.Timer(this.components);
             this.label_start = new System.Windows.Forms.Label();
+            this.timer_Sec = new System.Windows.Forms.Timer(this.components);
+            this.label_Time = new System.Windows.Forms.Label();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.pb_Enemy)).BeginInit();
             this.WorldFrame.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pb_ball)).BeginInit();
@@ -57,6 +61,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.enemy_2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.enemy_3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.enemy_4)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // pb_Enemy
@@ -196,12 +201,39 @@
             this.label_start.Text = "start";
             this.label_start.Click += new System.EventHandler(this.Label1_Click);
             // 
+            // timer_Sec
+            // 
+            this.timer_Sec.Tick += new System.EventHandler(this.Timer_Sec_Tick);
+            // 
+            // label_Time
+            // 
+            this.label_Time.AutoSize = true;
+            this.label_Time.Location = new System.Drawing.Point(394, 416);
+            this.label_Time.Name = "label_Time";
+            this.label_Time.Size = new System.Drawing.Size(35, 13);
+            this.label_Time.TabIndex = 6;
+            this.label_Time.Text = "label1";
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.settingsToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 48);
+            // 
+            // settingsToolStripMenuItem
+            // 
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.settingsToolStripMenuItem.Text = "Settings";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label_Time);
             this.Controls.Add(this.label_start);
             this.Controls.Add(this.enemy_4);
             this.Controls.Add(this.enemy_3);
@@ -229,6 +261,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.enemy_2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.enemy_3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.enemy_4)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -252,6 +285,10 @@
         private System.Windows.Forms.Timer timer_MoveBall;
         private System.Windows.Forms.Timer timerEnemy;
         private System.Windows.Forms.Label label_start;
+        private System.Windows.Forms.Timer timer_Sec;
+        private System.Windows.Forms.Label label_Time;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
     }
 }
 
