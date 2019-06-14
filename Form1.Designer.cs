@@ -41,11 +41,10 @@
             this.enemy_2 = new System.Windows.Forms.PictureBox();
             this.enemy_3 = new System.Windows.Forms.PictureBox();
             this.enemy_4 = new System.Windows.Forms.PictureBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.timer_MoveBall = new System.Windows.Forms.Timer(this.components);
             this.timerEnemy = new System.Windows.Forms.Timer(this.components);
+            this.label_start = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pb_Enemy)).BeginInit();
             this.WorldFrame.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pb_ball)).BeginInit();
@@ -175,28 +174,6 @@
             this.enemy_4.TabIndex = 3;
             this.enemy_4.TabStop = false;
             // 
-            // textBox1
-            // 
-            this.textBox1.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Location = new System.Drawing.Point(68, 417);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 13);
-            this.textBox1.TabIndex = 3;
-            this.textBox1.Text = "PLAYER1";
-            this.textBox1.TextChanged += new System.EventHandler(this.TextBox1_TextChanged);
-            // 
-            // textBox2
-            // 
-            this.textBox2.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox2.Location = new System.Drawing.Point(394, 417);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 13);
-            this.textBox2.TabIndex = 4;
-            this.textBox2.Text = "PLAYER2";
-            this.textBox2.TextChanged += new System.EventHandler(this.TextBox2_TextChanged);
-            // 
             // timer_MoveBall
             // 
             this.timer_MoveBall.Enabled = true;
@@ -209,14 +186,23 @@
             this.timerEnemy.Interval = 10;
             this.timerEnemy.Tick += new System.EventHandler(this.Timer1_Tick);
             // 
+            // label_start
+            // 
+            this.label_start.AutoSize = true;
+            this.label_start.Location = new System.Drawing.Point(329, 416);
+            this.label_start.Name = "label_start";
+            this.label_start.Size = new System.Drawing.Size(27, 13);
+            this.label_start.TabIndex = 5;
+            this.label_start.Text = "start";
+            this.label_start.Click += new System.EventHandler(this.Label1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.label_start);
             this.Controls.Add(this.enemy_4);
             this.Controls.Add(this.enemy_3);
             this.Controls.Add(this.enemy_2);
@@ -254,7 +240,6 @@
         private System.Windows.Forms.Panel WorldFrame;
         private System.Windows.Forms.PictureBox pb_Player;
         private System.Windows.Forms.PictureBox pb_ball;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.PictureBox player_4;
         private System.Windows.Forms.PictureBox player_3;
         private System.Windows.Forms.PictureBox player_2;
@@ -263,10 +248,10 @@
         private System.Windows.Forms.PictureBox enemy_2;
         private System.Windows.Forms.PictureBox enemy_3;
         private System.Windows.Forms.PictureBox enemy_4;
-        private System.Windows.Forms.TextBox textBox2;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.Timer timer_MoveBall;
         private System.Windows.Forms.Timer timerEnemy;
+        private System.Windows.Forms.Label label_start;
     }
 }
 

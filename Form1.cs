@@ -30,9 +30,6 @@ namespace pingpeng
             int Speed_Enemy;
             int Ball_Speed;
             int Ball_Force;
-
-        
-
         public Boolean Collision_Left(PictureBox obj)
         {
             if (obj.Location.X <= 0)    
@@ -49,10 +46,7 @@ namespace pingpeng
                 return true;
             }
             return false;
-        }
-
-
-       
+        } 
         public Boolean Collision_Up(PictureBox obj)
         {
                 if (obj.Location.Y <= 0)    //gdy obiekt Y znajduje się poniżej ekranu
@@ -221,10 +215,7 @@ namespace pingpeng
         {
 
         }
-       
-        
-
-        private void Form1_KeyDown(object sender, KeyEventArgs e)  //eventholder  z intrukcją switch dla wcisniecia klawisza 
+         private void Form1_KeyDown(object sender, KeyEventArgs e)  //eventholder  z intrukcją switch dla wcisniecia klawisza 
         {                                                           // zmienia booleany Player_Up i Player_Down w przypadku wcisniecia klawisza
             switch (e.KeyCode)                                      
             {
@@ -237,6 +228,11 @@ namespace pingpeng
                 case Keys.Down:
                     Player_Up = false;
                     Player_Down = true;
+                    break;
+                case Keys.Space:    //wciśniecie spacji startuje gre
+                    GameOn = true;
+                    LosowyStart(BallGoingLeft);
+                    label_start.Visible = false;
                     break;
             }
         }
@@ -255,8 +251,135 @@ namespace pingpeng
                     break;
             }
         }
+        public void LosowyStart(Boolean x)
+        {
+            for (int i = 0; i < rng.Next(5, 10); i++) 
+            {   
+                if (x)
+                {
+                    x = false;
+                }
+                else
+                {
+                    x = true;
+                }
+            }
+        }
+        public int odbicie(int x, Boolean Force = false, Boolean Negative = false)
+        {
+            if (Force)  //Kinda overdid this, not sure why but here's how it works
+            {
+                if (Negative)   //If the Negative boolean is on, it's always returns a negative number
+                {
+                    if (x > 0)  //So if X is above 0 it changes it
+                    {
+                        x = ~x + 1; //Not sure how this worked, ask the guy behind you.
+                    }
+                }
+                else
+                {   //Simple math, negatives a positive number
+                    x = x - (x * 2);
+                }
+            }
+            else
+            {
+                if (x > 0)
+                {
+                    x = x - (x * 2);
+                }
+                else
+                {
+                    x = ~x + 1;
+                }
+            }
+            return x;
+        }
+        public void AddScore(PictureBox[] Arr)
+        {
+            for (int i = 0; i < Arr.Length; i++)
+            {   //Goes through the entire array, checks where the first "non black" box is
+                if (Arr[i].BackColor == ScoreColor)
+                {   //And then changes it to black
+                    Arr[i].BackColor = Color.Black;
+                    break;
+                }
+            }
 
+        }
         private void timer_MoveBall_Tick(object sender, EventArgs e)
+        {
+            
+
+            if (GameOn)         
+            {
+                if (Player_Up && !Collision_Up(pb_Player)) //gdy gracz ma isc w góre i nie zderza sie ze scianą 
+                {               
+                    pb_Player.Top -= Speed_Player;    //przesuwa gracza w góre
+                }
+                if (Player_Down && !Collision_Down(pb_Player))
+                {               // Same here but going down instead, collision at the bottom check
+                    pb_Player.Top += Speed_Player;
+                }
+
+                if (Ball_Force > 0)
+                {   //If BallForce is positive, it moves the ball up #ballforce pixels
+                    pb_ball.Top -= Ball_Force;
+                }
+                if (Ball_Force < 0)
+                {   //Same as above but negative
+                    pb_ball.Top -= Ball_Force;
+                }
+
+                if (pb_ball.Location.Y <= 1) //gdy piłka zderzy sie ze górną scianą odibja ją z taka samą siłą
+                {   
+                    Ball_Force = odbicie(Ball_Force, true, true);
+                }
+                //gdy piłka uderzy w podłoge odbija ją
+                if (pb_ball.Location.Y + pb_ball.Height >= WorldFrame.Height - 1)
+                {
+                    Ball_Force = odbicie(Ball_Force, true, false);
+                }
+
+                if (BallGoingLeft)  //gdy piłka leci w lewo
+                {
+                    if (Collision_Left(pb_ball))    //i zderzy się ze scianą 
+                    {
+                        AddScore(Score_Player);     //dodaje punkt dla gracza
+                        pb_ball.Location = new Point(206, 67);
+                        LosowyStart(BallGoingLeft);
+                        Ball_Force = 0;
+                    }
+                    if (!Collision_Player(pb_ball)) // piłka leci dopóki sie nie zderzy ze scianą lub graczem
+                    {                              
+                        pb_ball.Left -= Ball_Speed;
+                    }
+                    else
+                    {                              
+                        BallGoingLeft = false;
+                    }
+                }
+                else
+                {
+                    if (Collision_Right(pb_ball))  //to samo dla przeciwnika 
+                    {
+                        AddScore(Score_Enemy);
+                        pb_ball.Location = new Point(206, 67);
+                        LosowyStart(BallGoingLeft);
+                        Ball_Force = 0;
+                    }
+                    if (!Collision_Enemy(pb_ball))
+                    {
+                        pb_ball.Left += Ball_Speed;
+                    }
+                    else
+                    {
+                        BallGoingLeft = true;
+                    }
+                }
+            }
+        }
+
+        private void Label1_Click(object sender, EventArgs e)
         {
 
         }
