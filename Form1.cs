@@ -77,9 +77,9 @@ namespace pingpeng
         public Boolean Collision_Enemy(PictureBox tar)
         {
             PictureBox temp1 = new PictureBox();   
-            temp1.Bounds = pb_Enemy.Bounds;         
-                                                    
-            temp1.SetBounds(temp1.Location.X - 1, temp1.Location.Y, 1, 20);
+            temp1.Bounds = pb_Enemy.Bounds;                                     //tworzy to prostokąty wokół paletki i w zaleznosci gdzie uderzy piłka 
+                                                                                // piłka odbije sie inaczej 
+            temp1.SetBounds(temp1.Location.X - 1, temp1.Location.Y, 1, 20);     // rozmiar prostokąta ustawilem na 20 px 
             if (tar.Bounds.IntersectsWith(temp1.Bounds))    
             {                                               
                 Ball_Force = 3;                              
